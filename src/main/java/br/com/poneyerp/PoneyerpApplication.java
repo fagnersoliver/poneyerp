@@ -1,6 +1,7 @@
 package br.com.poneyerp;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import br.com.poneyerp.domain.Cidade;
 import br.com.poneyerp.domain.Cliente;
 import br.com.poneyerp.domain.Endereco;
 import br.com.poneyerp.domain.Estado;
+import br.com.poneyerp.domain.ItemPedido;
 import br.com.poneyerp.domain.Pagamento;
 import br.com.poneyerp.domain.PagamentoComBoleto;
 import br.com.poneyerp.domain.PagamentoComCartao;
@@ -25,6 +27,7 @@ import br.com.poneyerp.repositories.CidadeRepository;
 import br.com.poneyerp.repositories.ClienteRepository;
 import br.com.poneyerp.repositories.EnderecoRepository;
 import br.com.poneyerp.repositories.EstadoRepository;
+import br.com.poneyerp.repositories.ItemPedidoRepository;
 import br.com.poneyerp.repositories.PagamentoRepository;
 import br.com.poneyerp.repositories.PedidoRepository;
 import br.com.poneyerp.repositories.ProdutoRepository;
@@ -55,6 +58,9 @@ public class PoneyerpApplication implements CommandLineRunner {
 
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PoneyerpApplication.class, args);
@@ -133,6 +139,18 @@ public class PoneyerpApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2.000);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped1, p2, 100.00, 2, 800.00);
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 }

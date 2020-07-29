@@ -1,7 +1,6 @@
 package br.com.poneyerp;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +120,7 @@ public class PoneyerpApplication implements CommandLineRunner {
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm");
 
 		Pedido ped1 = new Pedido(null, sdf.parse("10/02/2016 10:30"), cli1, e1);
 		Pedido ped2 = new Pedido(null, sdf.parse("25/02/2016 10:30"), cli1, e2);

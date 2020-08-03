@@ -23,4 +23,11 @@ public class CategoriaServices {
 
 	}
 
+	public Categoria insert(Categoria obj) {
+		
+		obj.setId(null);
+		return categoriaRepository.save(obj);
+
+	}
+
 }

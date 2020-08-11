@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.poneyerp.domain.Categoria;
+import br.com.poneyerp.dto.CategoriaDTO;
 import br.com.poneyerp.repositories.CategoriaRepository;
 import br.com.poneyerp.services.exceptions.DataIntegrityViolationException;
 import br.com.poneyerp.services.exceptions.ObjectNotFoundException;
@@ -57,7 +58,13 @@ public class CategoriaServices {
 
 		PageRequest pageRequest = PageRequest.of(page, linePerPage, Direction.valueOf(direction), orderBY);
 		return categoriaRepository.findAll(pageRequest);
-		
+
+	}
+
+	public Categoria fromDTO(CategoriaDTO objDto) {
+
+		return new Categoria(objDto.getId(), objDto.getNome());
+
 	}
 
 }

@@ -57,7 +57,7 @@ public class Cliente implements Serializable {
 		 * TipoCliente, Hibernate
 		 */
 
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {

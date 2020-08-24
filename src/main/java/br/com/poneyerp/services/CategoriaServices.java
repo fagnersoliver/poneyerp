@@ -34,8 +34,16 @@ public class CategoriaServices {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return categoriaRepository.save(obj);
+		Categoria atualizaCliente = find(obj.getId());
+
+		/* Atualiza sem apagar as demais informações */
+		updateData(atualizaCliente, obj);
+
+		return categoriaRepository.save(atualizaCliente);
+	}
+
+	private void updateData(Categoria atualizaCliente, Categoria obj) {
+		atualizaCliente.setNome(obj.getNome());
 	}
 
 	public void delete(Integer id) {
